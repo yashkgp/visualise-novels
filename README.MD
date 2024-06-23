@@ -1,6 +1,6 @@
-# Mac Text to Image App
+# VisioNovel
 
-This macOS application monitors the clipboard for text selection and sends the selected text to a server, which returns an image. The app displays the received image with a loading screen while waiting for the server response.
+VisioNovel transforms textual descriptions from novels into vivid visual scenes. Enhance your reading experience by seeing literature come to life!
 
 ## Installation
 
