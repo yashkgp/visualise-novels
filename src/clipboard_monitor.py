@@ -2,9 +2,13 @@ import logging
 from PyQt5.QtCore import QObject, QTimer
 from PyQt5.QtGui import QGuiApplication
 from server_communication import GetVisualization
+import requests
 
 # Configure logging
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(
+    level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s"
+)
+
 
 class ClipboardMonitor(QObject):
     def __init__(self, main_window):
@@ -24,5 +28,7 @@ class ClipboardMonitor(QObject):
             self.last_text = text
             self.main_window.show_loading_screen()
             logging.info(f"Clipboard text changed: {text}")
-            image_data = self.text_to_image.send_text_get_image(text=text)
+            image_url = self.text_to_image.send_text_get_image(text=text)
+            if image_url:
+                image_data = requests.get(image_url).content
             self.main_window.update_image(image_data)
